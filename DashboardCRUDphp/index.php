@@ -1,9 +1,3 @@
-<?php
-
-require_once('config/conexao.php')
-
-  ?>
-
 <!doctype html>
 <html lang="pt-br">
 
@@ -17,36 +11,41 @@ require_once('config/conexao.php')
 
 <body>
 
-  <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar scroll</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
-        aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <a class="navbar-brand" href="index.php">LOGO</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarScroll">
-        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">Dashboard</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Link
+              Ações
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <!--BTN NOVO-->
+              <li><a class="dropdown-item" href="?page=novo">Novo</a></li>
+
+              <!--BTN LISTAR-->
+              <li><a class="dropdown-item" href="?page=listar">Listar</a></li>
               <li>
+                <!--BTN CANCELAR SELEÇÃO-->
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li><a class="dropdown-item" href="#">Cancelar</a></li>
             </ul>
           </li>
+
           <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Link</a>
+            <a class="nav-link disabled" aria-disabled="true">Em andamento</a>
           </li>
         </ul>
         <form class="d-flex" role="search">
@@ -57,10 +56,34 @@ require_once('config/conexao.php')
     </div>
   </nav>
 
-  <h1>Hello, world!</h1>
-  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  <div class="container">
+    <div class="row">
+      <div class="col mt-5">
+        <?php
 
+        include('config/conexao.php');
 
+        switch (@$_REQUEST["page"]) {
+          //CASE NOVO
+          case "novo":
+            include("view/novo.php");
+            break;
+
+          //CASE LISTAR
+          case "listar":
+            include("view/listar.php");
+            break;
+
+          //CASE SALVAR
+          case "salvar":
+            include("controller/salvar.php");
+          default:
+            print "<h1>Bem-vindo</h1>";
+        }
+        ?>
+      </div>
+    </div>
+  </div>
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
